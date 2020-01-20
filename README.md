@@ -37,4 +37,4 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[1]https://github.com/ThanosFisherman/CountDownTimerFlow/blob/master/sample/src/main/java/io/github/thanosfisherman/countdowntimerflow/sample/MainActivity.kt
+[1]: https://github.com/ThanosFisherman/CountDownTimerFlow/blob/master/sample/src/main/java/io/github/thanosfisherman/countdowntimerflow/sample/MainActivity.kt
