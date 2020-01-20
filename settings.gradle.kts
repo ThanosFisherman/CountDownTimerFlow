@@ -1,3 +1,3 @@
-rootProject.name = "CountDownTImerFlow"
+rootProject.name = "CountDownTimerFlow"
 include("sample")
 include("countdowntimerflow")
