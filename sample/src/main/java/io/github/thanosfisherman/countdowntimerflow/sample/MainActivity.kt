@@ -4,11 +4,11 @@ import TimerFlow
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import io.github.thanosfisherman.countdowntimerflow.safeCollect
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     @ExperimentalCoroutinesApi
     private suspend fun setCountDown(millisInFuture: Long, countDownInterval: Long) {
 
-        TimerFlow.create(millisInFuture, countDownInterval).safeCollect {
+        TimerFlow.create(millisInFuture, countDownInterval).collect {
             Log.i("main", it.toString())
             textView.text = it.toString()
         }
