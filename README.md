@@ -2,7 +2,7 @@ CountDownTimerFlow
 -----------
 
 An Android library written in Kotlin that wraps the CountDownTimer in Coroutines [Flow](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/common/src/flow/Flow.kt).
-inspired by [RxCountDownTimer](https://github.com/wardellbagby/RxCountDownTimer)
+Inspired by [RxCountDownTimer](https://github.com/wardellbagby/RxCountDownTimer)
 
 Usage
 ------
