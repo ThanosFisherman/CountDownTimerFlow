@@ -13,7 +13,7 @@ Just launch a new Coroutine and call the function below. Also see [MainActivity]
    @ExperimentalCoroutinesApi
     private suspend fun setCountDown(millisInFuture: Long, countDownInterval: Long) {
 
-        TimerFlow.create(millisInFuture, countDownInterval).safeCollect {
+        TimerFlow.create(millisInFuture, countDownInterval).collect {
             Log.i("main", it.toString())
             textView.text = it.toString()
         }
