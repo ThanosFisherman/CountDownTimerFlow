@@ -1,13 +1,15 @@
 package io.github.thanosfisherman.countdowntimerflow.sample
 
+import TimerFlow
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import io.github.thanosfisherman.countdowntimerflow.TimerFlow
+import io.github.thanosfisherman.countdowntimerflow.safeCollect
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,21 +17,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        textView.text = "PLS"
         btnStart.setOnClickListener {
-            runBlocking {
+            CoroutineScope(Dispatchers.Main).launch {
                 setCountDown(5000, 1000)
             }
-
         }
     }
 
     @ExperimentalCoroutinesApi
     private suspend fun setCountDown(millisInFuture: Long, countDownInterval: Long) {
 
-        TimerFlow.create(millisInFuture, countDownInterval).collect {
-            Log.i("Main", it.toString())
+        TimerFlow.create(millisInFuture, countDownInterval).safeCollect {
+            Log.i("main", it.toString())
+            textView.text = it.toString()
         }
-
     }
 }

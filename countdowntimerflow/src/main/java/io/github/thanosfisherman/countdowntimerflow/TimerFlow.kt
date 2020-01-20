@@ -1,24 +1,33 @@
-package io.github.thanosfisherman.countdowntimerflow
-
+import android.os.CountDownTimer
 import android.os.Looper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 
 @ExperimentalCoroutinesApi
-class TimerFlow private constructor() {
+class TimerFlow private constructor(millisInFuture: Long, countDownInterval: Long) {
 
-
-    private fun tick(millisInFuture: Long, countDownInterval: Long): Flow<Long> = channelFlow {
+    private val tick: Flow<Long> = callbackFlow {
 
         if (Looper.myLooper() == null) {
-            throw IllegalStateException("Can't create RxCountDownTimer inside thread that has not called Looper.prepare()")
+            throw IllegalStateException("Can't create TimerFlow inside thread that has not called Looper.prepare() Just use Dispatchers.Main")
         }
 
-        val timer = ConcreteCountDownTimer(this, millisInFuture, countDownInterval)
-        timer.start()
+        object : CountDownTimer(millisInFuture, countDownInterval) {
+            override fun onFinish() {
+                offer(0L)
+                cancel()
+            }
 
+            override fun onTick(millisUntilFinished: Long) {
+                offer(millisUntilFinished)
+            }
+        }.start()
 
+        awaitClose()
     }
 
     companion object {
@@ -30,6 +39,6 @@ class TimerFlow private constructor() {
          */
         @JvmStatic
         fun create(millisInFuture: Long, countDownInterval: Long) =
-            TimerFlow().tick(millisInFuture, countDownInterval)
+            TimerFlow(millisInFuture, countDownInterval).tick
     }
 }
