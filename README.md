@@ -4,6 +4,11 @@ CountDownTimerFlow
 An Android library written in Kotlin that wraps the CountDownTimer in Coroutines [Flow](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/common/src/flow/Flow.kt).
 Inspired by [RxCountDownTimer](https://github.com/wardellbagby/RxCountDownTimer)
 
+Dependecy
+-----------
+
+Just copy-paste the [TimerFlow](https://github.com/ThanosFisherman/CountDownTimerFlow/blob/master/countdowntimerflow/src/main/java/io/github/thanosfisherman/countdowntimerflow/TimerFlow.kt) class to your project. This is all you really need. JCenter dependencies will also be available if there is demand.
+
 Usage
 ------
 
