@@ -9,3 +9,4 @@
 .cxx
 sample/build
 countdowntimerflow/build
+/buildSrc/build/
